@@ -43,7 +43,7 @@ public extension URL {
 	public var contentAccessDateDate: Date? {
 		get {
 			if let value = try? resourceValues(forKeys: [.contentAccessDateKey]) {
-				return value.creationDate
+				return value.contentAccessDate
 			} else {
 				return nil
 			}
@@ -53,7 +53,7 @@ public extension URL {
 	public var contentModificationDate: Date? {
 		get {
 			if let value = try? resourceValues(forKeys: [.contentModificationDateKey]) {
-				return value.creationDate
+				return value.contentModificationDate
 			} else {
 				return nil
 			}
@@ -65,7 +65,7 @@ public extension URL {
 		}
 	}
 
-	public mutating func setChangeDate(value: Date?) throws {
+	public mutating func setContentModificationDate(value: Date?) throws {
 		var container = URLResourceValues()
 		container.contentModificationDate = value
 		try setResourceValues(container)
