@@ -1,3 +1,5 @@
+//  Created by Tino Heth (locaURL@t-no.de) on 24.01.17.
+
 import Foundation
 
 public extension URL {
@@ -241,7 +243,7 @@ public extension URL {
 			removeXAttribute(name: name)
 			return
 		}
-		let data = try PropertyListSerialization.data(fromPropertyList: value, format: .binary, options: .allZeros)
+		let data = try PropertyListSerialization.data(fromPropertyList: value, format: .binary, options: 0)
 		try setXAttributeData(value: data, for: name)
 	}
 
@@ -335,10 +337,5 @@ extension Int64: TrivialStruct {}
 extension Int: TrivialStruct {}
 extension Float32: TrivialStruct {}
 extension Float64: TrivialStruct {}
-extension Float80: TrivialStruct {}
-extension CGFloat: TrivialStruct {}
-
-extension CGPoint: TrivialStruct {}
-extension CGRect: TrivialStruct {}
 
 extension Date: TrivialStruct {}
