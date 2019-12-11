@@ -64,7 +64,7 @@ class LocaURLTests: XCTestCase {
 
 	func testFileSize() {
 		let size = sampleURL.fileSize
-		XCTAssertEqual(size, sampleContent.characters.count)
+		XCTAssertEqual(size, sampleContent.count)
 	}
 
 	func testDisplayName() {
@@ -100,29 +100,22 @@ class LocaURLTests: XCTestCase {
 		XCTAssertEqual(check, value)
 	}
 
-//	func testDictionaryXattribute() {
-//		var value: [String: Int]? = ["key": 23, "another": 12]
-//		try! sampleURL.setXAttribute(value: value!, for: sampleContent)
-//		let check: [String: Int]? = try? sampleURL.getXAttribute(name: sampleContent)
-//		XCTAssertEqual(check!, value!)
-//		value = nil
-//		print(check as Any)
-//	}
-//
-//	func testFailDictionaryXattribute() {
-//		let value = ["key": 23, "another": self] as [String : Any]
-//		try! sampleURL.setXAttribute(value: value, for: sampleContent)
-//		let check: [String: Any]? = try? sampleURL.getXAttribute(name: sampleContent)
-//		XCTAssertNil(check)
-//	}
+	func testDictionaryXattribute() {
+		var value: [String: Int]? = ["key": 23, "another": 12]
+		try! sampleURL.setPlistXAttribute(value: value!, name: sampleContent)
+		let check: [String: Int] = try! sampleURL.getPlistXAttribute(name: sampleContent) as! [String: Int]
+		XCTAssertEqual(check, value!)
+		value = nil
+		print(check as Any)
+	}
+
+	func testFailDictionaryXattribute() {
+		let value = ["key": 23, "another": self] as [String : Any]
+		XCTAssertThrowsError(try sampleURL.setPlistXAttribute(value: value, name: sampleContent))
+	}
 //
 //	func testClassXattribute() {
 //		let value = self
 //		XCTAssertThrowsError(try sampleURL.setXAttribute(value: value, for: sampleContent))
 //	}
-
-    static var allTests : [(String, (LocaURLTests) -> () throws -> Void)] {
-        return [
-        ]
-    }
 }
